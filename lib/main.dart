@@ -11,50 +11,75 @@ class ToDoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ToDoList(
-        title: 'Title',
-        description: 'My description of the ToDo.',
-        tag: 'Chill',
-        color: 'blue',
-      ),
+      home: ToDoListPage(),
     );
   }
 }
 
-class ToDoList extends StatelessWidget {
-  final String title;
-  final String? description;
-  final String? tag;
-  final String? color;
-
-  ToDoList({required this.title, this.description, this.tag, this.color});
-
+class ToDoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('ToDo\'s'),
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
-          Card(
-            child: ListTile(
-              leading: Icon(
-                Icons.circle,
-                color: this.color == null ? null : chooseColor(this.color),
-              ),
-              title: Text(this.title),
-              subtitle:
-                  this.description == null ? null : Text(this.description!),
-              trailing: this.tag == null
-                  ? null
-                  : Chip(
-                      label: Text(this.tag!),
-                      backgroundColor: chooseTag(this.tag!),
-                    ),
-            ),
-          ),
+          ToDoCard(ToDo(
+            title: 'Title',
+            description: 'My description of the ToDo.',
+            tag: 'Chill',
+            color: 'blue',
+          )),
+          ToDoCard(ToDo(
+            title: 'Second Title',
+            description: 'Another sick description.',
+            tag: 'Warning',
+            color: 'yellow',
+          )),
+          ToDoCard(ToDo(
+            title: 'Third Title',
+            description:
+                'One more description that is bigger than all the others just to test how the layout will behave in this scenario.',
+            tag: 'Urgent',
+            color: 'black',
+          )),
         ],
+      ),
+    );
+  }
+}
+
+class ToDoCard extends StatelessWidget {
+  final ToDo toDo;
+
+  ToDoCard(this.toDo);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(4),
+          child: ListTile(
+            leading: Icon(
+              Icons.circle,
+              color:
+                  this.toDo.color == null ? null : chooseColor(this.toDo.color),
+            ),
+            title: Text(this.toDo.title),
+            subtitle: this.toDo.description == null
+                ? null
+                : Text(this.toDo.description!),
+            trailing: this.toDo.tag == null
+                ? null
+                : Chip(
+                    label: Text(this.toDo.tag!),
+                    backgroundColor: chooseTag(this.toDo.tag!),
+                  ),
+          ),
+        ),
       ),
     );
   }
@@ -82,4 +107,13 @@ class ToDoList extends StatelessWidget {
 
     return colors[color];
   }
+}
+
+class ToDo {
+  final String title;
+  final String? description;
+  final String? tag;
+  final String? color;
+
+  ToDo({required this.title, this.description, this.tag, this.color});
 }
