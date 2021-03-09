@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:todo_app/models/tags.dart';
 import 'package:todo_app/models/todo.dart';
 
 class ToDoCard extends StatelessWidget {
@@ -14,48 +16,29 @@ class ToDoCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(4),
           child: ListTile(
-            leading: Icon(
-              Icons.circle,
-              color:
-                  this.toDo.color == null ? null : chooseColor(this.toDo.color),
-            ),
-            title: Text(this.toDo.title),
-            subtitle: this.toDo.description == null
-                ? null
-                : Text(this.toDo.description!),
-            trailing: this.toDo.tag == null
-                ? null
-                : Chip(
-                    label: Text(this.toDo.tag!),
-                    backgroundColor: chooseTag(this.toDo.tag!),
-                  ),
+            leading: toDo.color != null
+                ? Icon(
+                    Icons.circle,
+                    color: toDo.chooseColor(toDo.color!),
+                  )
+                : null,
+            title: Text(toDo.title),
+            subtitle: toDo.description != null ? Text(toDo.description!) : null,
+            trailing: toDo.tag != null
+                ? Chip(
+                    label: Text(toDo.tag!),
+                    backgroundColor: toDo.chooseTag(toDo.tag!),
+                    labelStyle: TextStyle(
+                      color: toDo.tag != Tags.warning
+                          ? Colors.white
+                          : Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                : null,
           ),
         ),
       ),
     );
-  }
-
-  chooseTag(String tag) {
-    final tags = const <String, Color>{
-      "Urgent": Colors.red,
-      "Chill": Colors.green,
-      "Warning": Colors.yellow
-    };
-
-    return tags[tag];
-  }
-
-  chooseColor(String? color) {
-    final colors = const <String, Color>{
-      "red": Colors.red,
-      "blue": Colors.blue,
-      "green": Colors.green,
-      "yellow": Colors.yellow,
-      "black": Colors.black,
-      "white": Colors.white,
-      "purple": Colors.purple
-    };
-
-    return colors[color];
   }
 }

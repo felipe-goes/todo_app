@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_app/components/card.dart';
 
+import 'package:todo_app/models/tags.dart';
 import 'package:todo_app/models/todo.dart';
 
 class ToDoListPage extends StatelessWidget {
@@ -16,17 +17,30 @@ class ToDoListPage extends StatelessWidget {
           ToDoCard(ToDo(
             title: 'Second Title',
             description: 'Another sick description.',
-            tag: 'Warning',
+            tag: Tags.warning,
             color: 'yellow',
           )),
           ToDoCard(ToDo(
+            title: 'Second Title',
+            description: 'Another sick description.',
+            color: 'purple',
+          )),
+          ToDoCard(ToDo(
             title: 'Third Title',
-            description:
-                'One more description that is bigger than all the others just to test how the layout will behave in this scenario.',
-            tag: 'Urgent',
+            tag: Tags.urgent,
             color: 'black',
           )),
+          ToDoCard(ToDo(
+            title: 'Another title but bigger',
+            description:
+                'One more description that is bigger than all the others just to test how the layout will behave in this scenario.',
+            tag: Tags.chill,
+          )),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add),
       ),
     );
   }
