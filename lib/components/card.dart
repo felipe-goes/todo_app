@@ -13,29 +13,35 @@ class ToDoCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4),
       child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(4),
-          child: ListTile(
-            leading: toDo.color != null
-                ? Icon(
-                    Icons.circle,
-                    color: toDo.chooseColor(toDo.color!),
-                  )
-                : null,
-            title: Text(toDo.title),
-            subtitle: toDo.description != null ? Text(toDo.description!) : null,
-            trailing: toDo.tag != null
-                ? Chip(
-                    label: Text(toDo.tag!),
-                    backgroundColor: toDo.chooseTag(toDo.tag!),
-                    labelStyle: TextStyle(
-                      color: toDo.tag != Tags.warning
-                          ? Colors.white
-                          : Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                : null,
+        child: InkWell(
+          splashColor:
+              toDo.color != null ? toDo.chooseColor()!.withAlpha(50) : null,
+          onTap: () => {},
+          child: Padding(
+            padding: EdgeInsets.all(4),
+            child: ListTile(
+              leading: toDo.color != null
+                  ? Icon(
+                      Icons.circle,
+                      color: toDo.chooseColor(),
+                    )
+                  : null,
+              title: Text(toDo.title),
+              subtitle:
+                  toDo.description != null ? Text(toDo.description!) : null,
+              trailing: toDo.tag != null
+                  ? Chip(
+                      label: Text(toDo.tag!),
+                      backgroundColor: toDo.chooseTag(),
+                      labelStyle: TextStyle(
+                        color: toDo.tag != Tags.warning
+                            ? Colors.white
+                            : Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : null,
+            ),
           ),
         ),
       ),

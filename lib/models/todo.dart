@@ -10,7 +10,7 @@ class ToDo {
 
   ToDo({required this.title, this.description, this.tag, this.color});
 
-  Color? chooseTag(String tag) {
+  Color? chooseTag() {
     final tags = const <String, Color>{
       Tags.chill: Colors.green,
       Tags.warning: Colors.yellow,
@@ -20,7 +20,7 @@ class ToDo {
     return tags[tag];
   }
 
-  Color? chooseColor(String color) {
+  Color? chooseColor() {
     final colors = const <String, Color>{
       "red": Colors.red,
       "blue": Colors.blue,
