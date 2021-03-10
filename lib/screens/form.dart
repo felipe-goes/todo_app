@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/models/category.dart';
+import 'package:todo_app/components/category_items.dart';
+import 'package:todo_app/components/tag_items.dart';
+
+//import 'package:todo_app/models/categories.dart';
 
 class ToDoFormPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -33,16 +36,21 @@ class ToDoFormPage extends StatelessWidget {
                 TextFormField(
                   decoration: InputDecoration(labelText: "Description"),
                 ),
-                DropdownButtonFormField(
-                  hint: Text('Category'),
-                  items: <DropdownMenuItem>[
-                    DropdownMenuItem(
-                      child: Text('teste'),
-                      value: 'teste',
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 4, 4, 0),
+                        child: CategoryItems(),
+                      ),
                     ),
-                    DropdownMenuItem(
-                      child: Text('outro teste'),
-                      value: 'outro teste',
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(4, 4, 0, 0),
+                        child: TagItems(),
+                      ),
                     ),
                   ],
                 ),
