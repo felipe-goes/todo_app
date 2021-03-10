@@ -15,12 +15,12 @@ class ToDoCard extends StatelessWidget {
       child: Card(
         child: InkWell(
           splashColor:
-              toDo.color != null ? toDo.chooseColor()!.withAlpha(50) : null,
+              toDo.category != null ? toDo.chooseColor()!.withAlpha(50) : null,
           onTap: () => {},
           child: Padding(
             padding: EdgeInsets.all(4),
             child: ListTile(
-              leading: toDo.color != null
+              leading: toDo.category != null
                   ? Icon(
                       Icons.circle,
                       color: toDo.chooseColor(),

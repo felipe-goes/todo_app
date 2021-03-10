@@ -18,17 +18,17 @@ class ToDoListPage extends StatelessWidget {
             title: 'Second Title',
             description: 'Another sick description.',
             tag: Tags.warning,
-            color: 'yellow',
+            category: 'yellow',
           )),
           ToDoCard(ToDo(
             title: 'Second Title',
             description: 'Another sick description.',
-            color: 'purple',
+            category: 'purple',
           )),
           ToDoCard(ToDo(
             title: 'Third Title',
             tag: Tags.urgent,
-            color: 'black',
+            category: 'black',
           )),
           ToDoCard(ToDo(
             title: 'Another title but bigger',

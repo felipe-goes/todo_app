@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/screens/list.dart';
+import 'package:todo_app/screens/form.dart';
+// import 'package:todo_app/screens/list.dart';
 
 void main() {
   runApp(ToDoApp());
@@ -13,7 +14,7 @@ class ToDoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ToDoListPage(),
+      home: ToDoFormPage(),
     );
   }
 }
