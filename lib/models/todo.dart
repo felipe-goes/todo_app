@@ -18,7 +18,7 @@ class ToDo {
       Tags.urgent: Colors.red
     };
 
-    return tags[tag];
+    return tag != null ? tags[tag] : null;
   }
 
   Color? chooseColor() {
@@ -32,7 +32,7 @@ class ToDo {
       Categories.purple: Colors.purple
     };
 
-    return colors[category];
+    return category != null ? colors[category] : null;
   }
 
   @override
