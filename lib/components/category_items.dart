@@ -15,20 +15,17 @@ class _CategoryItemsState extends State<CategoryItems> {
 
     return Expanded(
       flex: 1,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 4, 4, 0),
-        child: DropdownButtonFormField(
-          onChanged: (dynamic newValue) {
-            setState(() {
-              newValue != null
-                  ? _selected = newValue.toString()
-                  : _selected = _selected;
-            });
-          },
-          items: createDropDownItems(),
-          value: _selected,
-          hint: Text(FormLabels.category),
-        ),
+      child: DropdownButtonFormField(
+        onChanged: (dynamic newValue) {
+          setState(() {
+            newValue != null
+                ? _selected = newValue.toString()
+                : _selected = _selected;
+          });
+        },
+        items: createDropDownItems(),
+        value: _selected,
+        hint: Text(FormLabels.category),
       ),
     );
   }
@@ -38,7 +35,10 @@ class _CategoryItemsState extends State<CategoryItems> {
 
     _dropDown = Categories.toList().map<DropdownMenuItem<String>>((category) {
       return DropdownMenuItem<String>(
-        child: Text(category),
+        child: Icon(
+          Icons.circle,
+          color: Categories.mapColor(category),
+        ),
         value: category,
       );
     }).toList();

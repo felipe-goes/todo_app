@@ -15,22 +15,19 @@ class _TagItemsState extends State<TagItems> {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(4, 4, 0, 0),
-        child: DropdownButtonFormField(
-          onChanged: (dynamic newValue) {
-            setState(() {
-              debugPrint("newValue: $newValue, _selected: $_selected");
-              newValue != null
-                  ? _selected = newValue.toString()
-                  : _selected = _selected;
-              debugPrint("newValue: $newValue, _selected: $_selected");
-            });
-          },
-          items: createDropDownItems(),
-          value: _selected,
-          hint: Text(FormLabels.tags),
-        ),
+      child: DropdownButtonFormField(
+        onChanged: (dynamic newValue) {
+          setState(() {
+            debugPrint("newValue: $newValue, _selected: $_selected");
+            newValue != null
+                ? _selected = newValue.toString()
+                : _selected = _selected;
+            debugPrint("newValue: $newValue, _selected: $_selected");
+          });
+        },
+        items: createDropDownItems(),
+        value: _selected,
+        hint: Text(FormLabels.tags),
       ),
     );
   }
@@ -40,7 +37,14 @@ class _TagItemsState extends State<TagItems> {
 
     _dropDown = Tags.toList().map<DropdownMenuItem<String>>((tag) {
       return DropdownMenuItem<String>(
-        child: Text(tag),
+        child: Text(
+          tag,
+          style: TextStyle(
+            backgroundColor: Tags.mapColor(tag),
+            color: tag != Tags.warning ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         value: tag,
       );
     }).toList();

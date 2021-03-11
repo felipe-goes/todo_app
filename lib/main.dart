@@ -14,7 +14,7 @@ class ToDoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ToDoListPage(),
+      home: ToDoFormPage(),
     );
   }
 }

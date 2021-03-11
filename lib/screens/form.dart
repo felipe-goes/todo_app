@@ -47,6 +47,10 @@ class _ToDoFormPageState extends State<ToDoFormPage> {
                 Row(
                   children: <Widget>[
                     CategoryItems(),
+                    Expanded(
+                      flex: 1,
+                      child: Text(""),
+                    ),
                     TagItems(),
                   ],
                 ),
