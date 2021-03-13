@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_app/components/card.dart';
 
-import 'package:todo_app/models/categories.dart';
-import 'package:todo_app/models/tags.dart';
 import 'package:todo_app/models/todo.dart';
 
+import 'package:todo_app/screens/form.dart';
+
 class ToDoListPage extends StatefulWidget {
+  final List<ToDo> _toDos = <ToDo>[];
+
   @override
   _ToDoListPageState createState() => _ToDoListPageState();
 }
 
 class _ToDoListPageState extends State<ToDoListPage> {
-  final List<ToDo> _toDos = <ToDo>[];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,23 +21,27 @@ class _ToDoListPageState extends State<ToDoListPage> {
         title: Text('ToDo\'s'),
       ),
       body: ListView.builder(
-          itemCount: _toDos.length,
+          itemCount: widget._toDos.length,
           itemBuilder: (BuildContext context, int index) {
-            return ToDoCard(_toDos[index]);
+            return ToDoCard(widget._toDos[index]);
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            _toDos.add(ToDo(
-              title: "Another Title",
-              description: "Another sick description.",
-              category: Categories.purple,
-              tag: Tags.chill,
-            ));
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return ToDoFormPage();
+            }),
+          ).then((toDo) => _addToDo(toDo));
         },
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void _addToDo(ToDo toDo) {
+    setState(() {
+      widget._toDos.add(toDo);
+    });
   }
 }

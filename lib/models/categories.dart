@@ -8,13 +8,15 @@ class Categories {
   static const black = "Black";
   static const white = "White";
   static const purple = "Purple";
+  //static const none = "None";
 
   static List toList() {
     return [red, blue, green, yellow, black, white, purple];
   }
 
   static Color? mapColor(String category) {
-    final colors = const <String, Color>{
+    final colors = const <String, Color?>{
+      //Categories.none: null,
       Categories.red: Colors.red,
       Categories.blue: Colors.blue,
       Categories.green: Colors.green,

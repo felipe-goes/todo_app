@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_app/models/categories.dart';
+import 'package:todo_app/models/drop_down_selected.dart';
 import 'package:todo_app/models/form_labels.dart';
 
 class CategoryItems extends StatefulWidget {
+  final DropDownSelected _dropDownSelected;
+
+  CategoryItems(this._dropDownSelected);
+
   @override
-  _CategoryItemsState createState() => _CategoryItemsState();
+  _CategoryItemsState createState() => _CategoryItemsState(_dropDownSelected);
 }
 
 class _CategoryItemsState extends State<CategoryItems> {
+  final DropDownSelected _dropDownSelected;
+
+  _CategoryItemsState(this._dropDownSelected);
+
   @override
   Widget build(BuildContext context) {
-    String? _selected;
-
     return Expanded(
       flex: 1,
       child: DropdownButtonFormField(
         onChanged: (dynamic newValue) {
           setState(() {
             newValue != null
-                ? _selected = newValue.toString()
-                : _selected = _selected;
+                ? _dropDownSelected.category = newValue.toString()
+                : _dropDownSelected.category = _dropDownSelected.category;
           });
         },
         items: createDropDownItems(),
-        value: _selected,
+        value: _dropDownSelected.category,
         hint: Text(FormLabels.category),
       ),
     );

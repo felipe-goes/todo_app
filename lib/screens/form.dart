@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/components/category_items.dart';
 import 'package:todo_app/components/tag_items.dart';
 
+import 'package:todo_app/models/categories.dart';
+import 'package:todo_app/models/tags.dart';
+import 'package:todo_app/models/drop_down_selected.dart';
 import 'package:todo_app/models/form_labels.dart';
-
-//import 'package:todo_app/models/categories.dart';
+import 'package:todo_app/models/todo.dart';
 
 const WARNING_MESSAGE = "Please choose a title for your ToDo";
 
@@ -16,6 +18,10 @@ class ToDoFormPage extends StatefulWidget {
 
 class _ToDoFormPageState extends State<ToDoFormPage> {
   final _formKey = GlobalKey<FormState>();
+
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final DropDownSelected _dropDownSelected = DropDownSelected();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class _ToDoFormPageState extends State<ToDoFormPage> {
             child: Column(
               children: <Widget>[
                 TextFormField(
+                  controller: _titleController,
                   validator: (value) {
                     if (value != null) {
                       if (value.isEmpty) {
@@ -41,17 +48,18 @@ class _ToDoFormPageState extends State<ToDoFormPage> {
                   decoration: InputDecoration(labelText: FormLabels.title),
                 ),
                 TextFormField(
+                  controller: _descriptionController,
                   decoration:
                       InputDecoration(labelText: FormLabels.description),
                 ),
                 Row(
                   children: <Widget>[
-                    CategoryItems(),
+                    CategoryItems(_dropDownSelected),
                     Expanded(
                       flex: 1,
                       child: Text(""),
                     ),
-                    TagItems(),
+                    TagItems(_dropDownSelected),
                   ],
                 ),
                 Padding(
@@ -63,7 +71,13 @@ class _ToDoFormPageState extends State<ToDoFormPage> {
                         onPressed: () {
                           if (_formKey.currentState != null) {
                             if (_formKey.currentState!.validate()) {
-                              debugPrint("Valido");
+                              ToDo _toDo = ToDo(
+                                title: _titleController.text,
+                                description: _descriptionController.text,
+                                category: _dropDownSelected.category,
+                                tag: _dropDownSelected.tag,
+                              );
+                              Navigator.pop(context, _toDo);
                             }
                           }
                         },

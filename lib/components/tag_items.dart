@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/form_labels.dart';
 
+import 'package:todo_app/models/drop_down_selected.dart';
+import 'package:todo_app/models/form_labels.dart';
 import 'package:todo_app/models/tags.dart';
 
 class TagItems extends StatefulWidget {
+  final DropDownSelected _dropDownSelected;
+
+  TagItems(this._dropDownSelected);
+
   @override
-  _TagItemsState createState() => _TagItemsState();
+  _TagItemsState createState() => _TagItemsState(_dropDownSelected);
 }
 
 class _TagItemsState extends State<TagItems> {
-  String? _selected;
+  final DropDownSelected _dropDownSelected;
+
+  _TagItemsState(this._dropDownSelected);
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +25,13 @@ class _TagItemsState extends State<TagItems> {
       child: DropdownButtonFormField(
         onChanged: (dynamic newValue) {
           setState(() {
-            debugPrint("newValue: $newValue, _selected: $_selected");
             newValue != null
-                ? _selected = newValue.toString()
-                : _selected = _selected;
-            debugPrint("newValue: $newValue, _selected: $_selected");
+                ? _dropDownSelected.tag = newValue.toString()
+                : _dropDownSelected.tag = _dropDownSelected.tag;
           });
         },
         items: createDropDownItems(),
-        value: _selected,
+        value: _dropDownSelected.tag,
         hint: Text(FormLabels.tags),
       ),
     );
