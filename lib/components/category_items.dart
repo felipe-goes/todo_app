@@ -42,10 +42,12 @@ class _CategoryItemsState extends State<CategoryItems> {
 
     _dropDown = Categories.toList().map<DropdownMenuItem<String>>((category) {
       return DropdownMenuItem<String>(
-        child: Icon(
-          Icons.circle,
-          color: Categories.mapColor(category),
-        ),
+        child: category != Categories.none
+            ? Icon(
+                Icons.circle,
+                color: Categories.mapColor(category),
+              )
+            : Text(Categories.none),
         value: category,
       );
     }).toList();

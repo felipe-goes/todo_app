@@ -4,7 +4,6 @@ import 'package:todo_app/components/category_items.dart';
 import 'package:todo_app/components/tag_items.dart';
 
 import 'package:todo_app/models/categories.dart';
-import 'package:todo_app/models/tags.dart';
 import 'package:todo_app/models/drop_down_selected.dart';
 import 'package:todo_app/models/form_labels.dart';
 import 'package:todo_app/models/todo.dart';
@@ -74,7 +73,10 @@ class _ToDoFormPageState extends State<ToDoFormPage> {
                               ToDo _toDo = ToDo(
                                 title: _titleController.text,
                                 description: _descriptionController.text,
-                                category: _dropDownSelected.category,
+                                category: _dropDownSelected.category !=
+                                        Categories.none
+                                    ? _dropDownSelected.category
+                                    : null,
                                 tag: _dropDownSelected.tag,
                               );
                               Navigator.pop(context, _toDo);
